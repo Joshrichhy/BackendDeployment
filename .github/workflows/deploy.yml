@@ -54,13 +54,13 @@ jobs:
         run: |
           DOCKER_TAG=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/devops-demo:latest
           docker tag devops-demo:$GITHUB_SHA $DOCKER_TAG
-          docker tag devops-demo:$GITHUB_SHA ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/enumverse-systest:$GITHUB_SHA
+          docker tag devops-demo:$GITHUB_SHA ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/devops-demo:$GITHUB_SHA
 
       - name: Push Docker image to ECR
         run: |
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/enumverse-systest:latest
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/enumverse-systest:$GITHUB_SHA
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/devops-demo:latest
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/devops-demo:$GITHUB_SHA
 
-      - name: Update ECS service
-        run: |
-          aws ecs update-service --cluster enum-v2-production-server --service enumverse-systest-a --force-new-deployment
+      # - name: Update ECS service
+      #   run: |
+      #     aws ecs update-service --cluster enum-v2-production-server --service enumverse-systest-a --force-new-deployment
