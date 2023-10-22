@@ -48,13 +48,13 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build Docker image
-        run: docker build -t devops-demo:$GITHUB_SHA .
+        run: docker build -t devops-demo-backend-repo:$GITHUB_SHA .
 
       - name: Tag Docker image with "latest"
         run: |
-          DOCKER_TAG=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/devops-demo:latest
-          docker tag devops-demo:$GITHUB_SHA $DOCKER_TAG
-          docker tag devops-demo:$GITHUB_SHA ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/devops-demo:$GITHUB_SHA
+          DOCKER_TAG=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/devops-demo-backend-repo:latest
+          docker tag devops-demo-backend-repo:$GITHUB_SHA $DOCKER_TAG
+          docker tag devops-demo-backend-repo:$GITHUB_SHA ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/devops-demo-backend-repo:$GITHUB_SHA
 
       - name: Push Docker image to ECR
         run: |
