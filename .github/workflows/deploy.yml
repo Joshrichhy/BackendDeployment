@@ -62,5 +62,6 @@ jobs:
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/devops-demo:$GITHUB_SHA
 
       # - name: Update ECS service
+      #
       #   run: |
       #     aws ecs update-service --cluster enum-v2-production-server --service enumverse-systest-a --force-new-deployment
