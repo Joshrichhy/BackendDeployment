@@ -41,20 +41,20 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
+          aws-region: us-east-1
 
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build Docker image
-        run: docker build -t enumverse-systest:$GITHUB_SHA .
+        run: docker build -t devops-demo:$GITHUB_SHA .
 
       - name: Tag Docker image with "latest"
         run: |
-          DOCKER_TAG=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/enumverse-systest:latest
-          docker tag enumverse-systest:$GITHUB_SHA $DOCKER_TAG
-          docker tag enumverse-systest:$GITHUB_SHA ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/enumverse-systest:$GITHUB_SHA
+          DOCKER_TAG=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/devops-demo:latest
+          docker tag devops-demo:$GITHUB_SHA $DOCKER_TAG
+          docker tag devops-demo:$GITHUB_SHA ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/enumverse-systest:$GITHUB_SHA
 
       - name: Push Docker image to ECR
         run: |
